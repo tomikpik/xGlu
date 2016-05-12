@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    >
+
+    <TextView
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:layout_weight="1"
+        android:id="@+id/tvListItemDate"
+        android:textAlignment="center" />
+
+    <TextView
+        android:textSize="16sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Glucose level"
+        android:layout_weight="1"
+        android:id="@+id/tvListItemGlucose"
+        android:textAlignment="textEnd" />
+
+</LinearLayout>
