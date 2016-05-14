@@ -97,6 +97,7 @@ public class NfcCardReader implements NfcAdapter.ReaderCallback {
 
         try {
             nfcV = NfcV.get(tag);
+            nfcV.close();
             nfcV.connect();
             mHandler.removeCallbacks(mStatusChecker);
             mHandler.postDelayed(mStatusChecker,200);
@@ -144,13 +145,13 @@ public class NfcCardReader implements NfcAdapter.ReaderCallback {
     }
 
     public static int byteToInt(byte first, byte second) {
-        int value = (second & 0xFF) << (Byte.SIZE * 1);
+        int value = (second & 0xFF) << (Byte.SIZE );
         value |= (first & 0xFF);
         return value;
     }
 
     public static int byteArrayToLeInt(byte first, byte second) {
-        int value = (second & 0xFF) << (Byte.SIZE * 1);
+        int value = (second & 0xFF) << (Byte.SIZE);
         value |= (first & 0xFF);
         return value;
     }

@@ -7,13 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
-
-import cz.eclub.xglu.xglu.Database.MeasuringRecord;
 
 /**
  * Created by Tom on 6. 2. 2016.

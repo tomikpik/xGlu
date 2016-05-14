@@ -3,9 +3,11 @@ package cz.eclub.xglu.xglu;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -67,6 +69,16 @@ public class MeasuringActivity extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         glucoseValueTv=(TextView)findViewById(R.id.glucoseValueTv);
         xGluLogo=(ImageView)findViewById(R.id.xGluLogo);
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        if(sharedPref.getBoolean("debug",false)){
+            findViewById(R.id.debugInfo1).setVisibility(View.VISIBLE);
+            findViewById(R.id.debugInfo2).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.debugInfo1).setVisibility(View.INVISIBLE);
+            findViewById(R.id.debugInfo2).setVisibility(View.INVISIBLE);
+        }
+
     }
 
     @Override
@@ -167,14 +179,14 @@ public class MeasuringActivity extends AppCompatActivity {
                         case 3:
                             statusText+="Completed";
                             break;
-                        case -6:
+                        case -130:
                             statusText+="Used blood strip inserted";
                             break;
-                        case -5:
+                        case -129:
                             statusText+="No strip detected ";
                             break;
-                        case -1:
-                            statusText+="Unknown error";
+                        case -128:
+                            statusText+="Error";
                             break;
                     }
 

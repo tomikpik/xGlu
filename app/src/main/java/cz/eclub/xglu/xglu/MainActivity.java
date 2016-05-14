@@ -2,9 +2,7 @@ package cz.eclub.xglu.xglu;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,9 +21,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import cz.eclub.xglu.xglu.Fragments.DebugFragment;
 import cz.eclub.xglu.xglu.Fragments.MeasurementHistoryFragment;
 import cz.eclub.xglu.xglu.Fragments.OgttFragment;
+import cz.eclub.xglu.xglu.MeasuringActivity;
+import cz.eclub.xglu.xglu.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -9,7 +9,7 @@
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".OgttFragment">
+    tools:context=".Fragments.OgttFragment">
 
     <ScrollView
         android:layout_width="fill_parent"
