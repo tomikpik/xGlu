@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.Arrays;
 
 import cz.eclub.xglu.xglu.Database.MeasuringRecord;
+import cz.eclub.xglu.xglu.Misc.CalibrationData;
 import cz.eclub.xglu.xglu.NfcCardReader;
 
 /**
@@ -28,7 +29,7 @@ public class GlucoseToolbox {
 
         Log.d("ahoj", "state: "+state);
 
-        String glucoseValueText = "--";
+        String glucoseValueText = "-";
 
         int gluc = 0;
         int temp = 0;
@@ -46,7 +47,10 @@ public class GlucoseToolbox {
 
 
             if (gluc != 0) {
-                glucoseValue = ((gluc - 400) * 0.02) + 5;
+                //glucoseValue = ((gluc - 400) * 0.02) + 5;
+                glucoseValue = calculateGlucose(gluc);
+
+
                 if (glucoseValue < 3) {
                     glucoseValueText = "LO";
                     glucoseValue = 0;
@@ -65,4 +69,12 @@ public class GlucoseToolbox {
         activity.updateGui(gluc, String.format("%.1f",temperature),state, (int) (glucoseValue - 3) * 100, glucoseValueText,a,glucoseValue);
 
     }
+
+    private double calculateGlucose(Integer gluc){
+        CalibrationData c = new CalibrationData(activity);
+        return c.glucose1+((c.glucose2-c.glucose1)/(c.xgluvalue2-c.xgluvalue1))*(gluc-c.xgluvalue1);
+    }
+
 }
+
+

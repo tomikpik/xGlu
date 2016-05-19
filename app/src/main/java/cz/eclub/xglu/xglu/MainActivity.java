@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
 
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+        //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
         setContentView(R.layout.activity_main);
 
@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setExitTransition(new Slide(Gravity.START));
         }
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

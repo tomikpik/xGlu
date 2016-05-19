@@ -99,6 +99,14 @@ public class NfcCardReader implements NfcAdapter.ReaderCallback {
             nfcV = NfcV.get(tag);
             nfcV.close();
             nfcV.connect();
+
+
+            byte[] a = {0x02,0x21,0x05,0x00,0x00,0x00,0x00};
+            synchronized (lock) {
+                nfcV.transceive(a);
+            }
+
+
             mHandler.removeCallbacks(mStatusChecker);
             mHandler.postDelayed(mStatusChecker,200);
         } catch (IOException e) {

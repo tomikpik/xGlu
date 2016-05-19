@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
@@ -57,10 +58,26 @@ public class MeasuringActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+        //overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         //overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
         setContentView(R.layout.activity_measuring);
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setContentView(R.layout.activity_measuring);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        nfcCardReader = new NfcCardReader(this);
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        nfcAdapter.enableReaderMode(this,nfcCardReader,READER_FLAGS,null);
+
 
         pageState=(TextView)findViewById(R.id.tvState);
         pageGlucosetv=(TextView)findViewById(R.id.tvGlucose);
@@ -70,25 +87,21 @@ public class MeasuringActivity extends AppCompatActivity {
         glucoseValueTv=(TextView)findViewById(R.id.glucoseValueTv);
         xGluLogo=(ImageView)findViewById(R.id.xGluLogo);
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        if(sharedPref.getBoolean("debug",false)){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+
+        if(sharedPref.getBoolean("debugMode",false)){
+            Log.d("tmp", "debug true");
             findViewById(R.id.debugInfo1).setVisibility(View.VISIBLE);
             findViewById(R.id.debugInfo2).setVisibility(View.VISIBLE);
         } else {
+            Log.d("tmp", "debug false");
             findViewById(R.id.debugInfo1).setVisibility(View.INVISIBLE);
             findViewById(R.id.debugInfo2).setVisibility(View.INVISIBLE);
         }
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        nfcCardReader = new NfcCardReader(this);
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        nfcAdapter.enableReaderMode(this,nfcCardReader,READER_FLAGS,null);
-
+        updateConnectedAndStatus(false,0);
     }
 
     @Override
@@ -159,6 +172,7 @@ public class MeasuringActivity extends AppCompatActivity {
 
                 TextView statusTv =(TextView)findViewById(R.id.tvStatus);
 
+                boolean newState = true;
 
 
                 if(connected){
@@ -169,7 +183,6 @@ public class MeasuringActivity extends AppCompatActivity {
                         case 0:
                             statusText+="Initializing";
                             break;
-
                         case 1:
                             statusText+="Place blood sample";
                             break;
@@ -179,14 +192,17 @@ public class MeasuringActivity extends AppCompatActivity {
                         case 3:
                             statusText+="Completed";
                             break;
-                        case -130:
+                        case 126: //7E
                             statusText+="Used blood strip inserted";
                             break;
-                        case -129:
-                            statusText+="No strip detected ";
+                        case 127: //7F
+                            statusText+="No strip detected";
                             break;
-                        case -128:
+                        case 128: //80
                             statusText+="Error";
+                            break;
+                        default:
+                            newState = false;
                             break;
                     }
 
@@ -204,8 +220,9 @@ public class MeasuringActivity extends AppCompatActivity {
                 connectedTv.setText(text);
                 connectedTv.setTextColor(color);
 
-                statusTv.setText(statusText);
-
+                if(newState) {
+                    statusTv.setText(statusText);
+                }
 
             }
         });

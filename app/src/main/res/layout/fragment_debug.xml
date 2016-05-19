@@ -28,7 +28,7 @@
                 android:id="@+id/card_view1"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 card_view:cardCornerRadius="7dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
@@ -67,24 +67,26 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:ems="10"
-                            android:id="@+id/editText"
+                            android:id="@+id/etGlucose1"
                             android:layout_weight="1"
                             android:hint="glucose 1"
                             android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:textAlignment="center" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:ems="10"
-                            android:id="@+id/editText2"
+                            android:id="@+id/etXgluValue1"
                             android:layout_weight="1"
                             android:hint="x.glu value 1"
                             android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp" />
+                            android:layout_marginRight="10dp"
+                            android:textAlignment="center" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -96,31 +98,33 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:ems="10"
-                            android:id="@+id/editText3"
+                            android:id="@+id/etGlucose2"
                             android:layout_weight="1"
                             android:hint="glucose 2"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:textAlignment="center" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:ems="10"
-                            android:id="@+id/editText4"
+                            android:id="@+id/etXgluValue2"
                             android:layout_weight="1"
                             android:hint="x.glu value 2"
                             android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp" />
+                            android:layout_marginBottom="10dp"
+                            android:textAlignment="center" />
                     </LinearLayout>
 
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Save Values"
-                        android:id="@+id/button"
+                        android:id="@+id/btnSaveCalibration"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="10dp" />
